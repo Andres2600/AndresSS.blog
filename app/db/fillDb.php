@@ -28,7 +28,7 @@ echo "Database tables cleaned successfuly!";
  for ($i=0; $i<13; $i++){
     $hashPassword = password_hash($faker->password, PASSWORD_BCRYPT);
     $pdo->exec("INSERT INTO 
-                SET username='{$faker->username}',
+                SET username='{$faker->userName}',
                      password='{$hashPassword}',
                      slug='{$faker->slug}',
                      ft_image='image{$faker->numberBetween($min=1, $max=5)}',
