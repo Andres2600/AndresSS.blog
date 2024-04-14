@@ -31,7 +31,7 @@ echo "Database tables cleaned successfuly!";
                 SET username='{$faker->userName}',
                      password='{$hashPassword}',
                      slug='{$faker->slug}',
-                     ft_image='image{$faker->numberBetween($min=1, $max=5)}',
+                     ft_image='image{$faker->numberBetween($min=1, $max=5)}.jpg',
                      content='{$faker->paragraphs(rand(2,15),true)}',
                      email='{$faker->email}',
                      phone='{$faker->e164PhoneNumber}',
@@ -49,7 +49,7 @@ echo'USERS,';
                SET username='Andres Sam',
                     password='{$hashPassword}',
                     slug='Andres_SS',
-                    ft_image='image{$faker->numberBetween($min=1, $max=5)}',
+                    ft_image='image{$faker->numberBetween($min=1, $max=5)}.jpg',
                     content='{$faker->paragraphs(rand(2,15),true)}',
                     email='{$faker->email}',
                     phone='{$faker->e164PhoneNumber}',
@@ -65,7 +65,7 @@ for ($i=0; $i<72; $i++){
                SET user_id='14',
                 title='{$faker->sentence(2)}',
                     slug='{$faker->slug}',
-                    ft_image='image{$faker->numberBetween($min=1, $max=5)}',
+                    ft_image='image{$faker->numberBetween($min=1, $max=5)}.jpg',
                     content='{$faker->paragraphs(rand(3,15),true)}',
                     created_at='{$faker->date} {$faker->time}',
                     published='1'
@@ -74,17 +74,44 @@ for ($i=0; $i<72; $i++){
 }
 echo'POSTS,';
 
-//Create Comments
-for ($i=0; $i<144; $i++){
-    $pdo->exec("INSERT INTO comments
-               SET pseudo='{$faker->userName}',
-                    email='{$faker->email}',
-                    title='{$faker->sentence(2)}',
+//Create Categories
+for ($i=0; $i<15; $i++){
+    $pdo->exec("INSERT INTO categories
+               SET  title='{$faker->sentence(2)}',
+                    slug='{$faker->slug}',      
                     content='{$faker->paragraphs(rand(3,15),true)}',
-                    created_at='{$faker->date} {$faker->time}',
-                    published='1'
-   ");
-   $posts[]=$pdo->lastInsertId();
+                    ft_image='image{$faker->numberBetween($min=1, $max=5)}.jpg'
+");
+   $categories[]=$pdo->lastInsertId();
 }
-echo'COMMENTS,';
+echo'CATEGORIES,';
+
+//link posts with categories
+foreach($posts as $post){
+    $randomCategories = $faker-> randomElements($categories,rand(1,1));
+    foreach ($randomCategories as $category){
+        $pdo -> exec("INSERT INTO posts_categories SET post_id=$post, category_id= $category");
+    }
+}
+
+echo'POSTS_CATEGORIES,';
+
+//link posts with comments
+foreach($posts as $post){
+    $randomComments = $faker->randomElements($categories,rand(2,2));
+    foreach ($randomComments as $comment){
+        $pdo -> exec("INSERT INTO posts_comments SET post_id=$post, comment_id=$comment");
+    }
+}
+
+echo'POSTS_COMMENTS,';
+
+//link posts with Admin user
+foreach($posts as $post){
+   
+        $pdo -> exec("INSERT INTO users_posts SET user_id='14', post_id= $post");
+  
+}
+
+echo'USERS_POSTS were created sucessfuly!,';
 ?>
