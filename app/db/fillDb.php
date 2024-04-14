@@ -40,6 +40,51 @@ echo "Database tables cleaned successfuly!";
     ");
     $users[]=$pdo->lastInsertId();
  }
-echo'Users,';
+echo'USERS,';
 
+//Create Admin
+
+   $hashPassword = password_hash('test', PASSWORD_BCRYPT);
+   $pdo->exec("INSERT INTO users
+               SET username='Andres Sam',
+                    password='{$hashPassword}',
+                    slug='Andres_SS',
+                    ft_image='image{$faker->numberBetween($min=1, $max=5)}',
+                    content='{$faker->paragraphs(rand(2,15),true)}',
+                    email='{$faker->email}',
+                    phone='{$faker->e164PhoneNumber}',
+                    role='Admin',
+                    created_at='{$faker->date} {$faker->time}'
+   ");
+echo'ADMIN ,';
+
+//Create Posts
+
+for ($i=0; $i<72; $i++){
+   $pdo->exec("INSERT INTO posts
+               SET user_id='14',
+                title='{$faker->sentence(2)}',
+                    slug='{$faker->slug}',
+                    ft_image='image{$faker->numberBetween($min=1, $max=5)}',
+                    content='{$faker->paragraphs(rand(3,15),true)}',
+                    created_at='{$faker->date} {$faker->time}',
+                    published='1'
+   ");
+   $posts[]=$pdo->lastInsertId();
+}
+echo'POSTS,';
+
+//Create Comments
+for ($i=0; $i<144; $i++){
+    $pdo->exec("INSERT INTO comments
+               SET pseudo='{$faker->userName}',
+                    email='{$faker->email}',
+                    title='{$faker->sentence(2)}',
+                    content='{$faker->paragraphs(rand(3,15),true)}',
+                    created_at='{$faker->date} {$faker->time}',
+                    published='1'
+   ");
+   $posts[]=$pdo->lastInsertId();
+}
+echo'COMMENTS,';
 ?>

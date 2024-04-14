@@ -39,6 +39,7 @@ echo 'posts,';
 
 $pdo -> exec("CREATE TABLE comments(
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    email VARCHAR (255) NOT NULL,
     pseudo VARCHAR (255) NOT NULL,
     title VARCHAR(255) NOT NULL,
     content text NOT NULL,
