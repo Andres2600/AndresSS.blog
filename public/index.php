@@ -2,5 +2,9 @@
 // autoload 
 require '../vendor/autoload.php';
 
-echo 'hello world';
+$url='';
+
+if (isset($GET['url'])){
+    echo 'yes';
+}
 ?>
