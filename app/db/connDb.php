@@ -2,7 +2,7 @@
     $host ='localhost';
     $db ='blogdb_and';
     $user ='root';
-    $psw ='M@ster32';
+    $psw ='master32';
     $port ='3306';
     $charset = 'utf8mb4';
     $dsn="mysql:host=$host;dbname=$db;port=$port;charset=$charset";
