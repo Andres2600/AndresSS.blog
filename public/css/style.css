@@ -1,0 +1,51 @@
+body{font-family: "Euclid Circ.menuar A", "Poppins";
+  font-size: 18px;
+  background-image:url('../img/backgound.jpg') ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-position: center;
+}
+
+@media(max-width: 991px){
+  .sidebar{
+      background-color: rgb(12, 12, 34);
+      backdrop-filter: blur(10px);
+  }
+}
+a{
+  text-decoration: none;
+}
+ul{
+  list-style: none;
+}
+h2{
+  color: aliceblue;
+}
+#article{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+  border-bottom: 1px solid rgb(246, 246, 252);
+}
+/* heading */
+.blog-heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; 
+}
+
+.blog-heading span{
+  color: rgb(117, 180, 180);
+}
+
+/* articles container */
+.article-container{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin: 20px;
+}
